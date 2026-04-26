@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Kỷ Niệm 1 Năm 7 Tháng ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1b001a 0%, #000000 100%);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh; /* Chiều cao động cho mobile */
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        #introBox {
+            position: absolute;
+            z-index: 100;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .btn-main {
+            background: linear-gradient(45deg, #ff0040, #ff4d6d);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #ff0040;
+            transition: all 0.3s ease;
+            animation: pulseBtn 1.5s infinite;
+            outline: none;
+            width: auto;
+            max-width: 90%;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); box-shadow: 0 0 15px #ff0040; }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px #ff0040; }
+            100% { transform: scale(1); box-shadow: 0 0 15px #ff0040; }
+        }
+
+        #storyContainer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100dvh;
+            display: none;
+        }
+
+        .slide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out;
+            width: 85%;
+            max-width: 400px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .photo-frame {
+            background: white;
+            padding: 8px 8px 25px 8px;
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .slide:nth-child(odd) .photo-frame { transform: rotate(-2deg); }
+        .slide:nth-child(even) .photo-frame { transform: rotate(2deg); }
+
+        .photo-frame img {
+            width: 100%;
+            max-height: 40dvh; /* Giới hạn chiều cao ảnh trên mobile */
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            color: #ffb3c6;
+            text-shadow: 0 0 8px #ff0040;
+            line-height: 1.4;
+            padding: 0 5px;
+        }
+
+        .final-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff4d6d;
+            text-shadow: 0 0 15px #ff0040;
+            margin: 0 0 15px 0;
+            animation: pulseText 2s infinite;
+        }
+
+        .dual-photo-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .dual-photo-container .photo-frame {
+            max-width: 48%;
+            padding: 6px 6px 15px 6px;
+        }
+
+        /* Hiệu ứng Rơi */
+        .spam-item {
+            position: fixed;
+            top: -120px;
+            z-index: 2;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        .spam-text {
+            position: fixed;
+            top: -50px;
+            z-index: 3;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110dvh); }
+        }
+
+        @keyframes pulseText {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (min-width: 600px) {
+            .slide { width: 90%; max-width: 550px; }
+            .story-text { font-size: 1.4rem; }
+            .final-text { font-size: 4.5rem; }
+            .btn-main { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="nhac.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="introBox">
+        <button id="startBtn" class="btn-main">Mở Quà Kỷ Niệm ❤️</button>
+    </div>
+
+    <div id="storyContainer">
+        <div class="slide active">
+            <div class="photo-frame"><img src="anh1.jpg" onerror="this.src='https://via.placeholder.com/400x400/ffb3c6/ff0040?text=28/04/2026'"></div>
+            <p class="story-text">Hôm nay là ngày 28/4/2026...<br>Tròn 1 năm 7 tháng mình bên nhau em nhỉ?</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh2.jpg" onerror="this.src='https://via.placeholder.com/400x500/ffb3c6/ff0040?text=Hạnh+Phúc'"></div>
+            <p class="story-text">Khoảng thời gian qua có em bên cạnh,<br>anh cảm thấy mình là người hạnh phúc nhất.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh3.jpg" onerror="this.src='https://via.placeholder.com/500x400/ffb3c6/ff0040?text=Cùng+Nhau'"></div>
+            <p class="story-text">Có những lúc vui, cũng có những lúc buồn,<br>nhưng anh mong mình sẽ cùng nhau đi hết tất cả.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh4.jpg" onerror="this.src='https://via.placeholder.com/400x400/ffb3c6/ff0040?text=Xinh+Đẹp'"></div>
+            <p class="story-text">Trong mắt anh, em luôn là<br>người con gái xinh đẹp nhất trên đời.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh5.jpg" onerror="this.src='https://via.placeholder.com/400x500/ffb3c6/ff0040?text=Kỷ+Niệm'"></div>
+            <p class="story-text">Những kỷ niệm cùng em luôn làm anh mỉm cười.<br>Anh trân trọng từng phút giây mình có nhau.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh6.jpg" onerror="this.src='https://via.placeholder.com/500x400/ffb3c6/ff0040?text=Hơi+Ấm'"></div>
+            <p class="story-text">Những cái nắm tay, những cái ôm,<br>và cả những nụ hôn mình trao nhau...</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh7.jpg" onerror="this.src='https://via.placeholder.com/400x400/ffb3c6/ff0040?text=Mãi+Mãi'"></div>
+            <p class="story-text">...tất cả làm anh càng yêu em nhiều hơn,<br>và chỉ muốn được bên em mãi mãi.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh8.jpg" onerror="this.src='https://via.placeholder.com/400x500/ffb3c6/ff0040?text=Không+Rời+Xa'"></div>
+            <p class="story-text">Anh yêu em nhiều lắm,<br>anh không bao giờ muốn rời xa em đâu!</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh9.jpg" onerror="this.src='https://via.placeholder.com/500x400/ffb3c6/ff0040?text=Cảm+Ơn'"></div>
+            <p class="story-text">Cảm ơn em đã đến bên anh,<br>và bước vào cuộc đời anh thật dịu dàng.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh10.jpg" onerror="this.src='https://via.placeholder.com/400x400/ffb3c6/ff0040?text=Đáng+Yêu'"></div>
+            <p class="story-text">Với anh, em là người đáng yêu nhất.<br>Mọi điều về em anh đều yêu hết mực.</p>
+        </div>
+
+        <div class="slide">
+            <div class="photo-frame"><img src="anh11.jpg" onerror="this.src='https://via.placeholder.com/400x500/ffb3c6/ff0040?text=Bên+Nhau'"></div>
+            <p class="story-text">Hãy cùng anh đi tiếp đoạn đường dài phía trước em nhé.<br>Để mình mãi mãi thuộc về nhau...</p>
+        </div>
+
+        <div class="slide">
+            <h1 class="final-text">Anh Yêu Em ❤️</h1>
+            <div class="dual-photo-container">
+                <div class="photo-frame"><img src="anh12.jpg" onerror="this.src='https://via.placeholder.com/300x400/ffb3c6/ff0040?text=Mạnh'"></div>
+                <div class="photo-frame"><img src="anh13.jpg" onerror="this.src='https://via.placeholder.com/300x400/ffb3c6/ff0040?text=Ngọc'"></div>
+            </div>
+            <p class="story-text">Kỷ niệm 1 năm 7 tháng iu nhao!</p>
+        </div>
+    </div>
+
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const introBox = document.getElementById('introBox');
+        const storyContainer = document.getElementById('storyContainer');
+        const slides = document.querySelectorAll('.slide');
+        const bgMusic = document.getElementById('bgMusic');
+        let currentSlide = 0;
+        let autoPlayInterval;
+
+        const spamTexts = ["Anh yêu em", "Duy Mạnh ❤️ Bảo Ngọc", "Yêu anh mãi nha?", "Em là đồ đáng yêu", "Cái đồ đáng yêu"];
+
+        startBtn.addEventListener('click', () => {
+            introBox.style.display = 'none';
+            storyContainer.style.display = 'block';
+            bgMusic.play().catch(e => console.log("Music error:", e));
+            startFireworks();
+            startAutoSwipe();
+        });
+
+        function startAutoSwipe() {
+            autoPlayInterval = setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide++;
+                
+                if (currentSlide >= slides.length) {
+                    currentSlide = slides.length - 1;
+                    clearInterval(autoPlayInterval);
+                    startFallingSpam(); 
+                }
+                slides[currentSlide].classList.add('active');
+                createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+            }, 4000);
+        }
+
+        function startFallingSpam() {
+            setInterval(() => {
+                createFallingImageSpam();
+                createFallingTextSpam();
+            }, 300);
+        }
+
+        function createFallingImageSpam() {
+            const img = document.createElement('img');
+            const imgNum = Math.floor(Math.random() * 12) + 1;
+            img.src = `anh${imgNum}.jpg`;
+            img.className = 'spam-item';
+            img.style.left = (Math.random() * 85) + "vw"; // Tránh lề phải mobile
+            img.style.width = (Math.random() * 50 + 50) + "px"; // Ảnh nhỏ lại trên mobile
+            img.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            img.onerror = function() { this.src = 'https://via.placeholder.com/100/ffb3c6/ff0040?text=❤️'; };
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 5000);
+        }
+
+        function createFallingTextSpam() {
+            const div = document.createElement('div');
+            div.className = 'spam-text';
+            div.innerText = spamTexts[Math.floor(Math.random() * spamTexts.length)];
+            div.style.left = (Math.random() * 70) + "vw";
+            div.style.fontSize = (Math.random() * 10 + 16) + "px";
+            div.style.color = `hsl(${Math.random() * 360}, 100%, 75%)`;
+            div.style.animationDuration = (Math.random() * 2 + 4) + "s";
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 6000);
+        }
+
+        // --- PHÁO HOA ---
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const shapes = ['❤️', '💖', '✨'];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x; this.y = y;
+                this.size = Math.random() * 10 + 5;
+                this.velocity = { x: (Math.random() - 0.5) * 6, y: (Math.random() - 0.5) * 6 };
+                this.alpha = 1;
+                this.char = shapes[Math.floor(Math.random() * shapes.length)];
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.font = `${this.size}px Arial`;
+                ctx.fillText(this.char, this.x, this.y);
+                ctx.restore();
+            }
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.01;
+            }
+        }
+
+        function createFirework(x, y) {
+            for (let i = 0; i < 10; i++) particles.push(new Particle(x, y));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                if (p.alpha <= 0) particles.splice(i, 1);
+                else { p.update(); p.draw(); }
+            });
+        }
+
+        function startFireworks() {
+            setInterval(() => {
+                createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+            }, 2000);
+            animate();
+        }
+    </script>
+</body>
+</html>
